@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Fut News</string>
+
+    <string name="title_news">News</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="txt_open_link">Open Link</string>
+    <string name="cd_news_image">News_image.</string>
+    <string name="cd_favorite_image">Favorite_Image</string>
+    <string name="cd_share_image">Share_Image</string>
+
+</resources>
