@@ -8,7 +8,7 @@
         <entry key="..\:/Users/victo/AndroidStudioProjects/FutNews/app/src/main/res/layout/fragment_home.xml" value="0.22826086956521738" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FutNews/app/src/main/res/layout/fragment_news.xml" value="0.25" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FutNews/app/src/main/res/layout/fragment_notifications.xml" value="0.22826086956521738" />
-        <entry key="..\:/Users/victo/AndroidStudioProjects/FutNews/app/src/main/res/layout/news_item.xml" value="0.264" />
+        <entry key="..\:/Users/victo/AndroidStudioProjects/FutNews/app/src/main/res/layout/news_item.xml" value="0.1" />
         <entry key="..\:/Users/victo/AndroidStudioProjects/FutNews/app/src/main/res/menu/bottom_nav_menu.xml" value="0.11302083333333333" />
       </map>
     </option>
@@ -18,5 +18,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>
