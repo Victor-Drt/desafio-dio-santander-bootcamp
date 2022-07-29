@@ -7,21 +7,47 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.dio.futnews.data.remote.FutNewsApi;
 import me.dio.futnews.domain.News;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewsViewModel extends ViewModel {
 
-    private final MutableLiveData<List<News>> news;
+    private final MutableLiveData<List<News>> news = new MutableLiveData<>();
+    private final FutNewsApi api;
 
     public NewsViewModel() {
-        this.news = new MutableLiveData<>();
 
-        List<News> news = new ArrayList<>();
-        news.add(new News("Manaus Empata!", "Jogo foi realizado nesta segunda feira."));
-        news.add(new News("Amazonas Busca Vitoria!", "Time aurinegro joga hoje pela serie C."));
-        news.add(new News("Dia de Decisão!", "São Paulo vai até Minas em busca da classificação."));
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://victor-drt.github.io/fut-news-api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        this.news.setValue(news);
+        api = retrofit.create(FutNewsApi.class);
+//        pega os dados da api
+        findNews();
+    }
+
+    private void findNews() {
+        api.getNews().enqueue(new Callback<List<News>>() {
+            @Override
+            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+                if (response.isSuccessful()) {
+                    news.setValue(response.body());
+                } else {
+//                    TODO pensar em um tratamento de erros
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<News>> call, Throwable t) {
+//                    TODO pensar em um tratamento de erros
+            }
+        });
     }
 
     public LiveData<List<News>> getNews() {
