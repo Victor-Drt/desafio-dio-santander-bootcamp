@@ -2,8 +2,6 @@ package me.dio.futnews;
 
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -11,13 +9,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
-import me.dio.futnews.data.local.AppDatabase;
+import me.dio.futnews.data.local.FutNewsDb;
 import me.dio.futnews.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private AppDatabase db;
+    private FutNewsDb db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +38,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupLocalDB() {
         db = Room.databaseBuilder(this,
-                        AppDatabase.class, "fut-news")
+                        FutNewsDb.class, "fut-news")
                 .allowMainThreadQueries() //permite a execuçao na thread principal
                 .build();
     }
 
-    public AppDatabase getDb() {
+    public FutNewsDb getDb() {
         return db;
     }
 }

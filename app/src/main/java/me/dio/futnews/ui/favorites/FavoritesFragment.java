@@ -24,12 +24,13 @@ public class FavoritesFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        FavoritesViewModel dashboardViewModel =
+        FavoritesViewModel favoriteViewModel =
                 new ViewModelProvider(this).get(FavoritesViewModel.class);
 
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
 
-        loadFavoriteNews();
+        loadFavoriteNews(favoriteViewModel);
+
 
         View root = binding.getRoot();
 
@@ -37,17 +38,14 @@ public class FavoritesFragment extends Fragment {
         return root;
     }
 
-    private void loadFavoriteNews() {
-        MainActivity activity = (MainActivity) getActivity();
-        if (activity != null) {
-            List<News> favoriteNews = activity.getDb().newsDao().loadFavoriteNews();
+    private void loadFavoriteNews(FavoritesViewModel favoriteViewModel) {
+        favoriteViewModel.loadFavoriteNews().observe(getViewLifecycleOwner(), localNews -> {
             binding.rvFavoriteNews.setLayoutManager(new LinearLayoutManager(getContext()));
-            binding.rvFavoriteNews.setAdapter((new NewsAdapter(favoriteNews, updatedNews -> {
-                activity.getDb().newsDao().save(updatedNews);
-                loadFavoriteNews();
+            binding.rvFavoriteNews.setAdapter((new NewsAdapter(localNews, updatedNews -> {
+                favoriteViewModel.saveNews(updatedNews);
+                loadFavoriteNews(favoriteViewModel);
             })));
-        }
-
+        });
     }
 
     @Override
