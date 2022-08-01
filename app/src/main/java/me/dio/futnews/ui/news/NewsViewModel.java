@@ -1,12 +1,16 @@
 package me.dio.futnews.ui.news;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.dio.futnews.data.local.AppDatabase;
 import me.dio.futnews.data.remote.FutNewsApi;
 import me.dio.futnews.domain.News;
 import retrofit2.Call;
@@ -19,6 +23,7 @@ public class NewsViewModel extends ViewModel {
 
     private final MutableLiveData<List<News>> news = new MutableLiveData<>();
     private final FutNewsApi api;
+//    private final AppDatabase db;
 
     public NewsViewModel() {
 
@@ -28,6 +33,8 @@ public class NewsViewModel extends ViewModel {
                 .build();
 
         api = retrofit.create(FutNewsApi.class);
+
+
 //        pega os dados da api
         findNews();
     }
